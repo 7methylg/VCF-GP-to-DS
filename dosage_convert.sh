@@ -11,7 +11,7 @@ bcftools query -f '%CHROM\t%POS\t%ID\t%REF\t%ALT\t%QUAL\t%FILTER\n' "$file" > "$
 
 echo "beginning conversion $file"
 
-head_count=`bcftools view -h "$file" | tail -1 | tr '\t' '\n' | wc -l`
+head_count=`bcftools view -h "$file" | tail -1 | wc -w`
 indivs=$((head_count-9))
 
 ./convert "$file" indivs
