@@ -26,7 +26,8 @@ snprintf(final, 70, "dosage-%s", argv[1]);
 vcf = fopen(final, "a");
 
 int line_read = -1;
-float dosage_line[44704];
+int indivs = atoi(argv[2]);
+float dosage_line[indivs];
 char line[50];
 char info_line[847400];
 char *info_l = info_line;
@@ -60,12 +61,12 @@ while(fgets(line, 50 , fp) != NULL){
 
 	line_read ++;
 
-	if (line_read == 44704){
+	if (line_read == indivs){
 
 		fgets(info_line, 847400, info);
 		fprintf(vcf, "%s\t.\tDS", strtok(info_line, "\n"));
 
-		for (int i=0; i<=44703; i++){
+		for (int i=0; i<=indivs-1; i++){
 			fprintf(vcf, "\t%f", dosage_line[i]);
 		}
 
